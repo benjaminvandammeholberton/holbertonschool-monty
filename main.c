@@ -22,7 +22,9 @@ int main (int argc, char **argv)
 		{"pop", pop_function},
                 {"swap", swap_function},
 		{"add", add_function},
-                {"nop", nop_function}
+                {"nop", nop_function},
+                {"#", nop_function},
+
 	};
 
         checkargc(argc);
@@ -42,7 +44,7 @@ int main (int argc, char **argv)
                         continue;
                 }
                 j = 0;
-                while (j < 7)
+                while (j < 8)
                 {
                         a = strcmp(command[0], (instructions[j].opcode));
                         if (a == 0)
