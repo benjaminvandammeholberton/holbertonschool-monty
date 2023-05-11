@@ -286,8 +286,20 @@ void pint_function(sstack_t **stack, unsigned int line_number)
  */
 void add_function(sstack_t **stack, unsigned int line_number)
 {
-        (void) stack;
-        (void) line_number;
+        sstack_t *tmp = NULL;
+
+        if (*stack == NULL || (*stack)->next == NULL)
+        {
+                fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+                exit(EXIT_FAILURE);
+        }
+        tmp = *stack;
+        while (tmp->next)
+                tmp = tmp->next;
+        tmp = tmp->prev;
+        tmp->n = tmp->n + tmp->next->n;
+        free(tmp->next);
+        tmp->next = NULL;
 }
 /**
  * nop_function - function that doesn't do anything
