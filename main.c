@@ -36,13 +36,11 @@ int main (int argc, char **argv)
                 line_number++;
                 command = tokenize_line(line);
                 argumentPush = command[1];
-                if (!command[0])
+                if (!command[0] || command[0][0] == '#')
                 {
                         free(command);
                         continue;
                 }
-                if (command[0][0] == '#')
-                        continue;
                 j = 0;
                 while (j < 8)
                 {
