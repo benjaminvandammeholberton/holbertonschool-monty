@@ -23,8 +23,6 @@ int main (int argc, char **argv)
                 {"swap", swap_function},
 		{"add", add_function},
                 {"nop", nop_function},
-                {"#", nop_function},
-
 	};
 
         checkargc(argc);
@@ -43,6 +41,8 @@ int main (int argc, char **argv)
                         free(command);
                         continue;
                 }
+                if (command[0][0] == '#')
+                        continue;
                 j = 0;
                 while (j < 8)
                 {
