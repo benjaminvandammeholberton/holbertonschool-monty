@@ -244,26 +244,20 @@ void pop_function(sstack_t **stack, unsigned int line_number)
 void swap_function(sstack_t **stack, unsigned int line_number)
 {
         sstack_t *tmp = *stack;
+        int m = 0;
+       
 
         if ((*stack)->next == NULL)
         {
                 fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
                 exit(EXIT_FAILURE);
         }
-        tmp = tmp->next;
-        if (tmp->next == NULL)
-        {
-                fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
-                exit(EXIT_FAILURE);
-        }
         while (tmp->next)
                 tmp = tmp->next;
-        tmp->next = tmp->prev;
-        tmp->prev->next = NULL;
-       // printf("tmp->n-->%d\n", tmp->n);
-      //  free(tmp);
 
-
+        m = tmp->prev->n;
+        tmp->prev->n = tmp->n;
+        tmp->n = m;
 }
 /**
  * pint_function - function that prints the value at the top of the stack
