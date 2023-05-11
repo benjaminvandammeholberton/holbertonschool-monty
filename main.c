@@ -245,7 +245,6 @@ void swap_function(sstack_t **stack, unsigned int line_number)
 {
         sstack_t *tmp = *stack;
         int m = 0;
-       
 
         if (*stack == NULL || (*stack)->next == NULL)
         {
@@ -266,19 +265,19 @@ void swap_function(sstack_t **stack, unsigned int line_number)
  */
 void pint_function(sstack_t **stack, unsigned int line_number)
 {
-        sstack_t **temp;
+        sstack_t *temp;
         (void) line_number;
         if (*stack == NULL)
         {
                 fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
                 exit(EXIT_FAILURE);
         }
-        temp = stack;
-        while ((*temp)->next)
+        temp = *stack;
+        while ((temp)->next)
         {
-                *temp = (*temp)->next;
+                temp = (temp)->next;
         }
-        printf("%d\n", (*temp)->n);
+        printf("%d\n", (temp)->n);
 }
 /**
  * add_function - function that adds the top two elemts of the stack
