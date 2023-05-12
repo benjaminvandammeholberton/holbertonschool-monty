@@ -49,6 +49,7 @@ void swap_function(sstack_t **stack, unsigned int line_number);
 void pint_function(sstack_t **stack, unsigned int line_number);
 void add_function(sstack_t **stack, unsigned int line_number);
 void nop_function(sstack_t **stack, unsigned int line_number);
+void sub_function(sstack_t **stack, unsigned int line_number);
 void freeandclose(sstack_t *head, char *line, FILE *fp);
 void checkargc(int argc);
 void exitfpnull(FILE *fp, char **argv);
