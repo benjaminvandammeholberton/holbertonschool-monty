@@ -360,7 +360,7 @@ void div_function(sstack_t **stack, unsigned int line_number)
                 exit(EXIT_FAILURE);
         }
         tmp = tmp->prev;
-        tmp->n =  tmp->next->n / tmp->n;
+        tmp->n = tmp->n / tmp->next->n;
         free(tmp->next);
         tmp->next = NULL;
 }
@@ -409,7 +409,7 @@ void mod_function(sstack_t **stack, unsigned int line_number)
                 exit(EXIT_FAILURE);
         }
         tmp = tmp->prev;
-        tmp->n =  tmp->next->n % tmp->n;
+        tmp->n =  tmp->n % tmp->next->n;
         free(tmp->next);
         tmp->next = NULL;
 }
