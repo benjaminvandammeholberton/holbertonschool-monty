@@ -24,9 +24,9 @@ int main (int argc, char **argv)
 		{"add", add_function},
                 {"nop", nop_function},
                 {"sub", sub_function},
-                {"div", add_function},
-                {"mul", nop_function},
-                {"mod", sub_function}
+                {"div", div_function},
+                {"mul", mul_function},
+                {"mod", mod_function}
 	};
 
         checkargc(argc);
@@ -413,6 +413,3 @@ void mod_function(sstack_t **stack, unsigned int line_number)
         free(tmp->next);
         tmp->next = NULL;
 }
-
-
-
