@@ -455,6 +455,11 @@ void pstr_function(sstack_t **stack, unsigned int line_number)
                 printf("\n");
                 return;
         }
+        if ((*stack)->next == NULL)
+        {
+                printf("%c\n", (*stack)->n);
+                return;
+        }
 
         tmp = *stack;
         while (tmp->next)
