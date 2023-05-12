@@ -467,8 +467,7 @@ void pstr_function(sstack_t **stack, unsigned int line_number)
                         tmp = tmp->prev;
                         continue;
                 }
-                else
-                        break;
+                break;
         }
-        printf("%c\n", tmp->n);
+        printf("\n");
 }
