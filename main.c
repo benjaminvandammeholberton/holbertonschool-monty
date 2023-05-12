@@ -23,7 +23,10 @@ int main (int argc, char **argv)
                 {"swap", swap_function},
 		{"add", add_function},
                 {"nop", nop_function},
-                {"sub", sub_function}
+                {"sub", sub_function},
+                {"div", add_function},
+                {"mul", nop_function},
+                {"mod", sub_function}
 	};
 
         checkargc(argc);
@@ -43,7 +46,7 @@ int main (int argc, char **argv)
                         continue;
                 }
                 j = 0;
-                while (j < 8)
+                while (j < 11)
                 {
                         a = strcmp(command[0], (instructions[j].opcode));
                         if (a == 0)
@@ -334,4 +337,82 @@ void sub_function(sstack_t **stack, unsigned int line_number)
         free(tmp->next);
         tmp->next = NULL;
 }
+/**
+ * div_function - function that divides the second top element of the stack by the top element of the stack
+ * @stack: first element of the double linked list
+ * @line_number: the number of the line in the file that orders the command  
+ */
+void div_function(sstack_t **stack, unsigned int line_number)
+{
+        sstack_t *tmp = NULL;
+
+        if (*stack == NULL || (*stack)->next == NULL)
+        {
+                fprintf(stderr, "L%d: can't div, stack too short\n", line_number);
+                exit(EXIT_FAILURE);
+        }
+        tmp = *stack;
+        while (tmp->next)
+                tmp = tmp->next;
+        if (tmp->n == 0)
+        {
+                fprintf(stderr, "L%d: division by zero\n", line_number);
+                exit(EXIT_FAILURE);
+        }
+        tmp = tmp->prev;
+        tmp->n =  tmp->next->n / tmp->n;
+        free(tmp->next);
+        tmp->next = NULL;
+}
+/**
+ * mul_function - multiplies the second top element of the stack with the top element of the stack
+ * @stack: first element of the double linked list
+ * @line_number: the number of the line in the file that orders the command  
+ */
+void mul_function(sstack_t **stack, unsigned int line_number)
+{
+        sstack_t *tmp = NULL;
+
+        if (*stack == NULL || (*stack)->next == NULL)
+        {
+                fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
+                exit(EXIT_FAILURE);
+        }
+        tmp = *stack;
+        while (tmp->next)
+                tmp = tmp->next;
+        tmp = tmp->prev;
+        tmp->n =  tmp->n * tmp->next->n;
+        free(tmp->next);
+        tmp->next = NULL;
+}
+/**
+ * mod_function -  computes the rest of the division of the second top element of the stack by the top element of the stack
+ * @stack: first element of the double linked list
+ * @line_number: the number of the line in the file that orders the command  
+ */
+void mod_function(sstack_t **stack, unsigned int line_number)
+{
+        sstack_t *tmp = NULL;
+
+        if (*stack == NULL || (*stack)->next == NULL)
+        {
+                fprintf(stderr, "L%d: can't mod, stack too short\n", line_number);
+                exit(EXIT_FAILURE);
+        }
+        tmp = *stack;
+        while (tmp->next)
+                tmp = tmp->next;
+        if (tmp->n == 0)
+        {
+                fprintf(stderr, "L%d: division by zero\n", line_number);
+                exit(EXIT_FAILURE);
+        }
+        tmp = tmp->prev;
+        tmp->n =  tmp->next->n % tmp->n;
+        free(tmp->next);
+        tmp->next = NULL;
+}
+
+
 
