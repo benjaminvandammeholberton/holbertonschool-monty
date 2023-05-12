@@ -330,7 +330,7 @@ void sub_function(sstack_t **stack, unsigned int line_number)
         while (tmp->next)
                 tmp = tmp->next;
         tmp = tmp->prev;
-        tmp->n = tmp->next->n - tmp->n;
+        tmp->n =  tmp->n - tmp->next->n;
         free(tmp->next);
         tmp->next = NULL;
 }
