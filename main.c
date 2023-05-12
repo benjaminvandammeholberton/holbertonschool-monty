@@ -313,7 +313,7 @@ void nop_function(sstack_t **stack, unsigned int line_number)
         (void) line_number;
 }
 /**
- * sub_function - function that adds the top two elemts of the stack
+ * sub_function - function that subtracts the top element of the stack from the second top element of the stack
  * @stack: first element of the double linked list
  * @line_number: the number of the line in the file that orders the command  
  */
@@ -323,7 +323,7 @@ void sub_function(sstack_t **stack, unsigned int line_number)
 
         if (*stack == NULL || (*stack)->next == NULL)
         {
-                fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+                fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
                 exit(EXIT_FAILURE);
         }
         tmp = *stack;
