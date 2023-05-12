@@ -53,6 +53,9 @@ void sub_function(sstack_t **stack, unsigned int line_number);
 void freeandclose(sstack_t *head, char *line, FILE *fp);
 void checkargc(int argc);
 void exitfpnull(FILE *fp, char **argv);
+void div_function(sstack_t **stack, unsigned int line_number);
+void mul_function(sstack_t **stack, unsigned int line_number);
+void mod_function(sstack_t **stack, unsigned int line_number);
 
 #endif
 
