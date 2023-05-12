@@ -26,7 +26,9 @@ int main (int argc, char **argv)
                 {"sub", sub_function},
                 {"div", div_function},
                 {"mul", mul_function},
-                {"mod", mod_function}
+                {"mod", mod_function},
+                {"pchar", pchar_function},
+                {"pstr", pstr_function}
 	};
 
         checkargc(argc);
@@ -46,7 +48,7 @@ int main (int argc, char **argv)
                         continue;
                 }
                 j = 0;
-                while (j < 11)
+                while (j < 13)
                 {
                         a = strcmp(command[0], (instructions[j].opcode));
                         if (a == 0)
@@ -412,4 +414,61 @@ void mod_function(sstack_t **stack, unsigned int line_number)
         tmp->n =  tmp->n % tmp->next->n;
         free(tmp->next);
         tmp->next = NULL;
+}
+/**
+ * pchar_function -  prints the char at the top of the stack
+ * @stack: first element of the double linked list
+ * @line_number: the number of the line in the file that orders the command  
+ */
+void pchar_function(sstack_t **stack, unsigned int line_number)
+{
+        sstack_t *tmp = NULL;
+
+        if (*stack == NULL)
+        {
+                fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
+                exit(EXIT_FAILURE);
+        }
+
+        tmp = *stack;
+        while (tmp->next)
+                tmp = tmp->next;
+        if (tmp->n < 0 || tmp->n > 127)
+        {
+                fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
+                exit(EXIT_FAILURE);
+        }
+        printf("%c\n", tmp->n);
+}
+/**
+ * pstr_function -  prints the string starting at the top of the stack
+ * @stack: first element of the double linked list
+ * @line_number: the number of the line in the file that orders the command  
+ */
+void pstr_function(sstack_t **stack, unsigned int line_number)
+{
+        sstack_t *tmp = NULL;
+        (void) line_number;
+
+        if (*stack == NULL)
+        {
+                printf("\n");
+                return;
+        }
+
+        tmp = *stack;
+        while (tmp->next)
+                tmp = tmp->next;
+        while (tmp->prev)
+        {
+                if (tmp->n > 0 && tmp->n <= 127)
+                {
+                        printf("%c", tmp->n);
+                        tmp = tmp->prev;
+                        continue;
+                }
+                else
+                        break;
+        }
+        printf("%c\n", tmp->n);
 }

@@ -56,6 +56,8 @@ void exitfpnull(FILE *fp, char **argv);
 void div_function(sstack_t **stack, unsigned int line_number);
 void mul_function(sstack_t **stack, unsigned int line_number);
 void mod_function(sstack_t **stack, unsigned int line_number);
+void pchar_function(sstack_t **stack, unsigned int line_number);
+void pstr_function(sstack_t **stack, unsigned int line_number);
 
 #endif
 
