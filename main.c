@@ -496,6 +496,9 @@ void rotl_function(sstack_t **stack, unsigned int line_number)
 
         (void) line_number;
 
+        if (*stack == NULL)
+                return;  
+
         tmp = *stack;
         while(tmp->next)
                 tmp = tmp->next;
@@ -518,6 +521,9 @@ void rotr_function(sstack_t **stack, unsigned int line_number)
         int m = 0;
 
         (void) line_number;
+
+        if (*stack == NULL)
+                return;        
 
         tmp = *stack;
         m = tmp->n;
