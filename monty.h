@@ -40,8 +40,11 @@ typedef struct instruction_s
         void (*f)(sstack_t **stack, unsigned int line_number);
 } instruction_t;
 
-
+void checkargc(int argc);
+void exitfpnull(FILE *fp, char **argv);
 char **tokenize_line (char *line);
+void freeandclose(sstack_t *head, char *line, FILE *fp);
+
 void push_function(sstack_t **stack, unsigned int line_number);
 void pall_function(sstack_t **stack, unsigned int line_number);
 void pop_function(sstack_t **stack, unsigned int line_number);
@@ -50,14 +53,13 @@ void pint_function(sstack_t **stack, unsigned int line_number);
 void add_function(sstack_t **stack, unsigned int line_number);
 void nop_function(sstack_t **stack, unsigned int line_number);
 void sub_function(sstack_t **stack, unsigned int line_number);
-void freeandclose(sstack_t *head, char *line, FILE *fp);
-void checkargc(int argc);
-void exitfpnull(FILE *fp, char **argv);
 void div_function(sstack_t **stack, unsigned int line_number);
 void mul_function(sstack_t **stack, unsigned int line_number);
 void mod_function(sstack_t **stack, unsigned int line_number);
 void pchar_function(sstack_t **stack, unsigned int line_number);
 void pstr_function(sstack_t **stack, unsigned int line_number);
+void rotl_function(sstack_t **stack, unsigned int line_number);
+void rotr_function(sstack_t **stack, unsigned int line_number);
 
 #endif
 

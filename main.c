@@ -28,7 +28,9 @@ int main (int argc, char **argv)
                 {"mul", mul_function},
                 {"mod", mod_function},
                 {"pchar", pchar_function},
-                {"pstr", pstr_function}
+                {"pstr", pstr_function},
+                {"rotl", rotl_function},
+                {"rotr", rotr_function}
 	};
 
         checkargc(argc);
@@ -48,7 +50,7 @@ int main (int argc, char **argv)
                         continue;
                 }
                 j = 0;
-                while (j < 13)
+                while (j < 15)
                 {
                         a = strcmp(command[0], (instructions[j].opcode));
                         if (a == 0)
@@ -481,4 +483,48 @@ void pstr_function(sstack_t **stack, unsigned int line_number)
                 break;
         }
         printf("\n");
+}
+/**
+ * rotl_function - rotates the stack to the top
+ * @stack: first element of the double linked list
+ * @line_number: the number of the line in the file that orders the command  
+ */
+void rotl_function(sstack_t **stack, unsigned int line_number)
+{
+        sstack_t *tmp = NULL;
+        int m = 0;
+
+        (void) line_number;
+
+        tmp = *stack;
+        while(tmp->next)
+                tmp = tmp->next;
+        m = tmp->n;
+        while(tmp->prev)
+        {
+                tmp->n = tmp->prev->n;
+                tmp = tmp->prev;
+        }
+        tmp->n = m;
+}
+/**
+ * rotr_function - rotates the stack to the bottom
+ * @stack: first element of the double linked list
+ * @line_number: the number of the line in the file that orders the command  
+ */
+void rotr_function(sstack_t **stack, unsigned int line_number)
+{
+        sstack_t *tmp = NULL;
+        int m = 0;
+
+        (void) line_number;
+
+        tmp = *stack;
+        m = tmp->n;
+        while(tmp->next)
+        {
+                tmp->n = tmp->next->n;
+                tmp = tmp->next;
+        }
+        tmp->n = m;
 }
