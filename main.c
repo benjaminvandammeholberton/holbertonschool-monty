@@ -457,14 +457,20 @@ void pstr_function(sstack_t **stack, unsigned int line_number)
         }
         if ((*stack)->next == NULL)
         {
-                printf("%c\n", (*stack)->n);
+                if ((*stack)->n > 0 && (*stack)->n <= 127)
+                {
+                        printf("%c\n", (*stack)->n);
+                        return;
+                }
+                printf("\n");
                 return;
+                
         }
 
         tmp = *stack;
         while (tmp->next)
                 tmp = tmp->next;
-        while (tmp->prev)
+        while (tmp)
         {
                 if (tmp->n > 0 && tmp->n <= 127)
                 {
